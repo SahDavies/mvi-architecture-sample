@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MVI Architecture</string>
+    <string name="check_box_image">checkbox image</string>
+
+    <!-- question 1-->
+    <string name="in_my_free_time">In my free time I like to …</string>
+    <string name="read">Read</string>
+    <string name="work_out">Work out</string>
+    <string name="draw">Draw</string>
+    <string name="play_games">Play video games</string>
+    <string name="dance">Dance</string>
+    <string name="watch_movies">Watch movies</string>
+
+    <!-- question 2 -->
+    <string name="pick_superhero">Pick a Compose comic character</string>
+    <string name="spark">Spark</string>
+    <string name="lenz">Lenz</string>
+    <string name="bugchaos">Bug of Chaos</string>
+    <string name="frag">Frag</string>
+
+    <string name="previous">previous</string>
+    <string name="next">next</string>
+    <string name="done">done</string>
+    <string name="close">close</string>
+    <string name="select_all">Select all</string>
+    <string name="select_one">Select one</string>
+</resources>
