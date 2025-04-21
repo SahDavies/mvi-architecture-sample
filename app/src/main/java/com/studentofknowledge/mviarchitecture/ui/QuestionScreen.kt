@@ -54,20 +54,39 @@ fun QuestionScreen(
     val viewModel = QuestionViewModel(getQuestions())
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    QuestionScreenContent(
+        uiState = uiState,
+        onClickNext = viewModel::next,
+        onClickPrevious = viewModel::previous,
+        onOptionSelected = viewModel::onOptionSelected,
+        onDone = onDone
+    )
+}
+
+@Composable
+private fun QuestionScreenContent(
+    uiState: UiState,
+    onClickNext: () -> Unit,
+    onClickPrevious: () -> Unit,
+    onOptionSelected: (Option) -> Unit,
+    onDone: () -> Unit
+) {
     Scaffold(
         bottomBar = {
             QuestionBottomBar(
                 hasPrevious = uiState.hasPrevious,
                 hasNext = uiState.hasNext,
                 hasMadeSelection = { uiState.userSelection != null }, // is used to enable or disable next button only if user has made a selection
-                onClickNext = viewModel::next,
-                onClickPrevious = viewModel::previous,
+                onClickNext = onClickNext,
+                onClickPrevious = onClickPrevious,
                 onDone = onDone
             )
         }
     ) { paddingValues ->
         val modifier = Modifier.padding(paddingValues)
-        Column(modifier = Modifier.padding(horizontal = 18.dp).fillMaxWidth()) {
+        Column(modifier = Modifier
+            .padding(horizontal = 18.dp)
+            .fillMaxWidth()) {
             QuestionTopBar(
                 count = uiState.questionCount,
                 totalQuestions = uiState.totalQuestions,
@@ -104,7 +123,7 @@ fun QuestionScreen(
                     title = question,
                     instruction = R.string.select_one,
                     possibleAnswers = options,
-                    onOptionSelected = viewModel::onOptionSelected,
+                    onOptionSelected = onOptionSelected,
                     userSelection = uiState.userSelection,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
@@ -140,7 +159,7 @@ private fun QuestionBottomBar(
             ) {
                 Text(text = stringResource(id = R.string.previous))
             }
-            Spacer(Modifier.size(24.dp))
+            Spacer(Modifier.size(36.dp))
             Button(
                 onClick = if (hasNext) onClickNext else onDone,
                 modifier = modifier,
